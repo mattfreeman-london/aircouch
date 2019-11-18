@@ -42,4 +42,15 @@ I would like to be able to see available dates for the space
 So I can stay somewhere
 I would like to book a space for one night
 
-As a guest, I would like to be able to book a space for one night 
+As a guest, I would like to be able to book a space for one night
+
+Database Steps in README.md:
+1. brew install postgresql
+2. brew services start postgresql
+3. psql postgres
+4. CREATE DATABASE aircouch;
+5. \c aircouch
+6. CREATE TABLE (x3) found in root/db/migrations
+7. CREATE DATABASE aircouch_test;
+8. \c aircouch_test
+9. CREATE TABLE (x3) found in root/db/migrations
