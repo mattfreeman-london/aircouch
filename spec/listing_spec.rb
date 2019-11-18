@@ -13,10 +13,10 @@ describe 'Listing' do
    end
  end
 
-#  describe '#create' do
-#    it 'creates a new listing' do
-#      Listing.create(name: 'Nat couch', description: 'nice', price: 20, availability: '29-11-2019')
-#      expect
-#    end
-#  end
+ describe '#create' do
+   it 'creates a new listing' do
+     Listing.create(name: 'Nat couch', description: 'nice', price: 20, available_date: '2019-11-28')
+     expect(Listing.all).to include 'Nat couch'
+   end
+ end
 end
