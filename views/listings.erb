@@ -1,0 +1,8 @@
+<h1> Listings </h1>
+<ul>
+  <% @listings.each do |listing| %>
+  <li>
+    <%= listing.name %>, <%= listing.description %>, £<%= listing.price %>, available: <%= listing.available_date %>
+  </li>
+  <% end %>
+</ul>
