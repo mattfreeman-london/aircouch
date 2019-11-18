@@ -1,9 +1,11 @@
 require 'pg'
 
-p 'Setting up test database...'
+def setup_test_db
+  p 'Setting up test database...'
 
-connection = PG.connect(dbname: 'aircouch_test')
+  connection = PG.connect(dbname: 'aircouch_test')
 
-connection.exec('TRUNCATE users;')
-connection.exec('TRUNCATE listings;')
-connection.exec('TRUNCATE bookings;')
+  connection.exec('TRUNCATE users;')
+  connection.exec('DROP listings;')
+  connection.exec('DROP bookings;')
+end
