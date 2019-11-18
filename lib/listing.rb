@@ -1,3 +1,5 @@
+require 'pg'
+
 class Listing
 
   attr_reader :name, :description, :price, :available_date
