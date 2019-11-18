@@ -15,7 +15,7 @@ def create_tables(connect)
 end
 
 def drop_tables(connection)
-  connection.exec('TRUNCATE listings;')
   connection.exec('TRUNCATE bookings;')
+  connection.exec('TRUNCATE listings;')
   connection.exec('TRUNCATE users;')
 end
