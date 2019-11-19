@@ -31,13 +31,13 @@ class AirCouch < Sinatra::Base
   end
 
   post '/users/new' do
-    User.create(name: params[:name], email: params[:email], password: params[:password])
-    session[:name] = params[:name]
+    user = User.create(name: params[:name], email: params[:email], password: params[:password])
+    session[:user_id] = user.id
     redirect '/welcome'
   end
 
   get '/welcome' do
-    @user = session[:name]
+    @user = User.find(session[:user_id])
     erb :welcome
   end
 
