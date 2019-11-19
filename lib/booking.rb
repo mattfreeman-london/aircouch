@@ -30,4 +30,15 @@ class Booking
     result = connect.exec("SELECT * FROM bookings;")
     result.map { |booking| Booking.new(booking['id'], booking['start_date'], booking['end_date'], booking['guest_id'], booking['listing_id']) }
   end
+
+  def self.find(id)
+    if ENV['RACK'] == 'test'
+      connect = PG.connect(dbname: 'aircouch_test')
+    else
+      connect = PG.connect(dbname: 'aircouch')
+    end
+    result = connect.exec("SELECT * FROM bookings 
+                          WHERE id = '#{id}';")
+    result.map { |booking| Booking.new(booking['id'], booking['start_date'], booking['end_date'], booking['guest_id'], booking['listing_id'])}
+  end
 end

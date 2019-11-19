@@ -30,4 +30,13 @@ describe Booking do
       expect(Booking.all.length).to eq(2)
     end
   end
+
+  context "#find" do
+    it 'finds a booking by id' do
+      connection = PG.connect(dbname: 'aircouch_test')
+      setup_test_db
+      add_booking(connection)
+      expect(Booking.find(1)[0].start_date).to eq("2019-08-01")
+    end
+  end
 end
