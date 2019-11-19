@@ -1,15 +1,16 @@
-# aircouch
+# **airCouch**
 
-Presented by Team AirCouch! Makers October 2019 Cohort.
+## *Presented by Team AirCouch! Makers October 2019 Cohort*
 
-User Stories:
+##### User Stories:
 
-1) As a visitor
-So I can view plan a stay
-I want to view available listings
+```
+1) As a visitor, 
+So I can view plan a stay, 
+I want to view available listings.
 
 2) As a guest,
-So I can book a space
+So I can book a space, 
 I want to sign up fo an account
 
 3) As a guest,
@@ -47,6 +48,7 @@ I would like to book a space for one night
 11) As a guest,
 So I have somewhere to stay
 I would like to be able to book a space for one night
+```
 
 Database Steps in README.md:
 1. brew install postgresql
