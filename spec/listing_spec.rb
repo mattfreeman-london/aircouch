@@ -1,7 +1,7 @@
 require 'listing'
 
 describe 'Listing' do
- subject(:listing) { described_class.new(name, description, price, available_date) }
+#  subject(:listing) { described_class.new(name, description, price, available_date) }
 
  connection = PG.connect(dbname: 'aircouch_test')
 

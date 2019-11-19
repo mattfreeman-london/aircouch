@@ -7,16 +7,6 @@ describe Booking do
   let (:test_listing) {double(:listing, id: 1, price: 30)}
   
   subject(:booking) { described_class.new(start_date, end_date)}
-  # context 'Initialize' do
-  #   it "has a start date" do
-  #     expect(booking.start_date).to eq("2019-8-1")
-  #   end
-
-  #   it "has an end date" do
-  #     expect(booking.end_date).to eq("2019-9-1")
-  #   end
-  # end
-
   context ".create" do
     it "creates a new booking" do
       expect(Booking.create(start_date, end_date, test_user.id, test_listing.id, test_listing.price)).to be_a(Booking)

@@ -11,7 +11,6 @@ describe 'users' do
 
     it 'has a name, email and password' do
       test_user = User.create(name: 'Matt', email: 'matt@makers.com', password: 'wordpass')
-      print test_user
       expect(test_user.name).to eq('Matt')
       expect(test_user.email).to eq('matt@makers.com')
       expect(test_user.password).to eq('wordpass')

@@ -1,7 +1,6 @@
 require 'pg'
 
 def setup_test_db
-  p 'Setting up test database...'
   connection = PG.connect(dbname: 'aircouch_test')
   drop_tables(connection)
   create_tables(connection)
