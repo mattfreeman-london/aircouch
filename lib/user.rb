@@ -1,12 +1,11 @@
 class User
 
-  attr_reader :id, :name, :email, :password
+  attr_reader :id, :name, :email
 
-  def initialize(id:, name:, email:, password:)
+  def initialize(id:, name:, email:)
     @id = id
     @name = name
     @email = email
-    @password = password
   end
 
   def self.create(name:, email:, password:)
@@ -19,7 +18,7 @@ class User
                         VALUES ('#{name}', '#{email}', '#{password}')
                         RETURNING id, name, email, password;")
 
-    user = User.new(id: results.values[0][0], name: results[0]['name'], email: results[0]['email'], password: results[0]['password'])
+    user = User.new(id: results.values[0][0], name: results[0]['name'], email: results[0]['email'])
   end
 
   def self.find(id)
@@ -29,6 +28,17 @@ class User
       connect = PG.connect(dbname: 'aircouch')
     end
     result = connect.exec("SELECT * FROM users WHERE id = '#{id}'")
-    User.new(id: result[0]['id'], name: result[0]['name'], email: result[0]['email'], password: result[0]['password'])
+    User.new(id: result[0]['id'], name: result[0]['name'], email: result[0]['email'])
   end
+
+  def self.authenticate(email:, password:)
+    if ENV['RACK'] == 'test'
+      connect = PG.connect(dbname: 'aircouch_test')
+    else
+      connect = PG.connect(dbname: 'aircouch')
+    end
+    result = connect.exec("SELECT * FROM users WHERE email = '#{email}'")
+    User.new(id: result[0]['id'], name: result[0]['name'], email: result[0]['email'])
+  end
+
 end
