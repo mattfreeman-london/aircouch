@@ -3,6 +3,9 @@
   <% @listings.each do |listing| %>
   <li>
     <%= listing.name %>, <%= listing.description %>, £<%= listing.price %>, available: <%= listing.available_date %>
+     <form action="/listings/<%= listing.id %>" method="get">
+      <input class="" type="submit" value="book">
+     </form>
   </li>
   <% end %>
 </ul>
