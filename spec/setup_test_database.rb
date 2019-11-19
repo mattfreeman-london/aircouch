@@ -27,3 +27,10 @@ end
 def add_listing(connection)
   connection.exec("INSERT INTO listings (name, description, price, start_date, end_date, host_id) VALUES ('listing_1', 'this is a couch', 20, '2019-01-01', '2019-01-02', '1');")
 end
+
+def add_booking(connection)
+  start_date = "2019-8-1"
+  end_date = "2019-9-1"
+  connection.exec("INSERT INTO bookings (start_date, end_date, guest_id, listing_id) 
+  VALUES ('#{start_date}', '#{end_date}', '1', '1');")
+end
