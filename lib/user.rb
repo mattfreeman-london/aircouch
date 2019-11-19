@@ -17,5 +17,4 @@ class User
     id = results.values[0][0]
     user = User.new(id, name, email, password)
   end
-
 end
