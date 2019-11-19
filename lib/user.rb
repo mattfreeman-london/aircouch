@@ -21,9 +21,6 @@ class User
 
     user = User.new(id: results.values[0][0], name: results[0]['name'], email: results[0]['email'], password: results[0]['password'])
   end
-<<<<<<< HEAD
-end
-=======
 
   def self.find(id)
     if ENV['RACK'] == 'test'
@@ -35,4 +32,3 @@ end
     User.new(id: result[0]['id'], name: result[0]['name'], email: result[0]['email'], password: result[0]['password'])
   end
 end
->>>>>>> 4d5b02932d2b9d5a325693b5f1b7d5a2457b94ff
