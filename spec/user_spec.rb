@@ -13,7 +13,20 @@ describe 'users' do
       test_user = User.create(name: 'Matt', email: 'matt@makers.com', password: 'wordpass')
       expect(test_user.name).to eq('Matt')
       expect(test_user.email).to eq('matt@makers.com')
-      expect(test_user.password).to eq('wordpass')
     end
+  end
+
+  context '.authenticate' do
+    it 'returns a user given correct email and password, if one exists' do
+      user = User.create(name: 'Nat', email: 'nat@makers.com', password: 'password')
+      authenticated_user = User.authenticate(email: 'nat@makers.com', password: 'password')
+      expect(authenticated_user.id).to eq user.id
+    end
+  end
+end
+describe '.create' do
+  it 'hashes the Password using BCrypt' do
+    expect(BCrypt::Password).to receive(:create).with('password123')
+    User.create(name: 'bob', email: 'test@example.com', password: 'password123')
   end
 end

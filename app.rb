@@ -56,5 +56,21 @@ class AirCouch < Sinatra::Base
     erb :welcome
   end
 
+  get '/login' do
+    erb :login
+  end
+
+  post '/login' do
+    if ENV['RACK'] == 'test'
+      connect = PG.connect(dbname: 'aircouch_test')
+    else
+      connect = PG.connect(dbname: 'aircouch')
+    end
+    result = connect.exec("SELECT * FROM users WHERE email = '#{params[:email]}'")
+    user = User.new(id: result[0]['id'], name: result[0]['name'], email: result[0]['email'], password: result[0]['password'])
+    session[:user_id] = user.id
+    redirect '/welcome'
+  end
+
   run! if app_file == $0
 end
