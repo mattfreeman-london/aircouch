@@ -2,13 +2,12 @@ require 'bcrypt'
 
 class User
 
-  attr_reader :id, :name, :email, :password
+  attr_reader :id, :name, :email
 
-  def initialize(id:, name:, email:, password:)
+  def initialize(id:, name:, email:)
     @id = id
     @name = name
     @email = email
-    @password = password
   end
 
   def self.create(name:, email:, password:)
@@ -17,11 +16,12 @@ class User
     else
       connect = PG.connect(dbname: 'aircouch')
     end
+    encrypted_password = BCrypt::Password.create(password)
     results = connect.exec("INSERT INTO users (name, email, password)
-                        VALUES ('#{name}', '#{email}', '#{password}')
-                        RETURNING id, name, email, password;")
+                        VALUES ('#{name}', '#{email}', '#{encrypted_password}')
+                        RETURNING id, name, email;")
 
-    user = User.new(id: results.values[0][0], name: results[0]['name'], email: results[0]['email'], password: results[0]['password'])
+    User.new(id: results.values[0][0], name: results[0]['name'], email: results[0]['email'])
   end
 
   def self.find(id)
@@ -31,14 +31,6 @@ class User
       connect = PG.connect(dbname: 'aircouch')
     end
     result = connect.exec("SELECT * FROM users WHERE id = '#{id}'")
-    User.new(id: result[0]['id'], name: result[0]['name'], email: result[0]['email'], password: result[0]['password'])
+    User.new(id: result[0]['id'], name: result[0]['name'], email: result[0]['email'])
   end
 end
-
-#   # def self.create(email:, password:)
-#   #   encrypted_password = BCrypt: :Password.create(password)
-#   #   result = DatabaseConnection.query("INSERT INTO users(email,password) VALUES ('#{email}', '#{encrypted_password}') RETURNING id, email")
-#   #   User.new(id: result[0]['id'], email: result[0]['email'])
-#   # # end
-#
-# end
