@@ -13,7 +13,6 @@ describe 'users' do
       test_user = User.create(name: 'Matt', email: 'matt@makers.com', password: 'wordpass')
       expect(test_user.name).to eq('Matt')
       expect(test_user.email).to eq('matt@makers.com')
-<<<<<<< HEAD
     end
   end
 
@@ -22,8 +21,6 @@ describe 'users' do
       user = User.create(name: 'Nat', email: 'nat@makers.com', password: 'password')
       authenticated_user = User.authenticate(email: 'nat@makers.com', password: 'password')
       expect(authenticated_user.id).to eq user.id
-=======
->>>>>>> 3250f5928826c613c00c14d26ea564b8cb147f2d
     end
   end
 end
