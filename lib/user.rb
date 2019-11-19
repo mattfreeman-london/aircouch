@@ -33,4 +33,15 @@ class User
     result = connect.exec("SELECT * FROM users WHERE id = '#{id}'")
     User.new(id: result[0]['id'], name: result[0]['name'], email: result[0]['email'])
   end
+
+  def self.authenticate(email:, password:)
+    if ENV['RACK'] == 'test'
+      connect = PG.connect(dbname: 'aircouch_test')
+    else
+      connect = PG.connect(dbname: 'aircouch')
+    end
+    result = connect.exec("SELECT * FROM users WHERE email = '#{email}'")
+    User.new(id: result[0]['id'], name: result[0]['name'], email: result[0]['email'])
+  end
+
 end
