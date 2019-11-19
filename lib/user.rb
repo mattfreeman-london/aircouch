@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 class User
 
   attr_reader :id, :name, :email
@@ -14,11 +16,12 @@ class User
     else
       connect = PG.connect(dbname: 'aircouch')
     end
+    encrypted_password = BCrypt::Password.create(password)
     results = connect.exec("INSERT INTO users (name, email, password)
-                        VALUES ('#{name}', '#{email}', '#{password}')
-                        RETURNING id, name, email, password;")
+                        VALUES ('#{name}', '#{email}', '#{encrypted_password}')
+                        RETURNING id, name, email;")
 
-    user = User.new(id: results.values[0][0], name: results[0]['name'], email: results[0]['email'])
+    User.new(id: results.values[0][0], name: results[0]['name'], email: results[0]['email'])
   end
 
   def self.find(id)
