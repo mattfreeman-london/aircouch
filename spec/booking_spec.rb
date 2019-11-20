@@ -5,7 +5,7 @@ describe Booking do
   end_date = "2019-9-1"
   let (:test_user) {double(:user, id: 1, name: "Robert", email:"test@test.com")}
   let (:test_listing) {double(:listing, id: 1, price: 30)}
-  
+
   subject(:booking) { described_class.new(start_date, end_date)}
   context "#create" do
     it "creates a new booking" do
@@ -24,7 +24,6 @@ describe Booking do
   context "#all" do
     it 'retrieves all entries from bookings' do
       connection = PG.connect(dbname: 'aircouch_test')
-      setup_test_db
       add_booking(connection)
       add_booking(connection)
       expect(Booking.all.length).to eq(2)
@@ -34,7 +33,6 @@ describe Booking do
   context "#find" do
     it 'finds a booking by id' do
       connection = PG.connect(dbname: 'aircouch_test')
-      setup_test_db
       add_booking(connection)
       expect(Booking.find(1)[0].start_date).to eq("2019-08-01")
     end

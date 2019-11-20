@@ -18,4 +18,11 @@ describe 'Listing' do
      expect(listing.name).to eq 'Nat couch'
    end
  end
+
+ context "#find" do
+   it 'finds a listing by id' do
+     add_listing(connection)
+     expect(Listing.find(1)[0].start_date).to eq("2019-01-01")
+   end
+ end
 end

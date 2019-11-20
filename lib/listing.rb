@@ -42,4 +42,17 @@ class Listing
               result[0]['end_date']
             )
   end
+
+  def self.find(id)
+    result = DatabaseConnection.query("SELECT * FROM listings WHERE id = '#{id}';")
+    result.map { |listing| Listing.new(
+                  listing['id'],
+                  listing['name'],
+                  listing['description'],
+                  listing['price'],
+                  listing['start_date'],
+                  listing['end_date']
+                )
+              }
+  end
 end
