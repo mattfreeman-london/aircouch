@@ -1,3 +1,5 @@
+<% require_relative '../lib/database_connection' %>
+
 <h2>Welcome to AirCouch, <%= @user.name %>. Thanks for joining us!</h2>
 
 <form action='/listings' method="get">
@@ -12,3 +14,14 @@
 <form action="/login/destroy" method="post">
   <input type="submit" value="Log out"/>
 </form>
+
+<div>
+  <h3> My listings </h3>
+  <% result = DatabaseConnection.query("SELECT * FROM listings WHERE host_id = '#{@user.id}'") %>
+  <% @listings.each do |my_listing| %>
+  <li>
+    <%= my_listing.name %>, <%= my_listing.description %>, <%= my_listing.price %>,
+    <%= my_listing.start_date %>, <%= my_listing.end_date %>
+  </li>
+  <% end %>
+</div>

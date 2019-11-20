@@ -1,6 +1,7 @@
 require 'booking'
 
 describe Booking do
+  connection = PG.connect(dbname: 'aircouch_test')
   start_date = "2019-8-1"
   end_date = "2019-9-1"
   let (:test_user) {double(:user, id: 1, name: "Robert", email:"test@test.com")}
@@ -23,7 +24,6 @@ describe Booking do
 
   context "#all" do
     it 'retrieves all entries from bookings' do
-      connection = PG.connect(dbname: 'aircouch_test')
       add_booking(connection)
       add_booking(connection)
       expect(Booking.all.length).to eq(2)
@@ -32,7 +32,6 @@ describe Booking do
 
   context "#find" do
     it 'finds a booking by id' do
-      connection = PG.connect(dbname: 'aircouch_test')
       add_booking(connection)
       expect(Booking.find(1)[0].start_date).to eq("2019-08-01")
     end
