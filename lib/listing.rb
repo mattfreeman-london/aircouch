@@ -11,19 +11,19 @@ class Listing
     @price = price
     @start_date = start_date
     @end_date = end_date
-end
+  end
 
   def self.all
     result = DatabaseConnection.query('SELECT * FROM listings;')
-    result.map { |listing| 
+    result.map { |listing|
                   Listing.new(
-                    listing['id'], 
-                    listing['name'], 
-                    listing['description'], 
-                    listing['price'], 
-                    listing['start_date'],  
+                    listing['id'],
+                    listing['name'],
+                    listing['description'],
+                    listing['price'],
+                    listing['start_date'],
                     listing['end_date']
-                  ) 
+                  )
                 }
   end
 
@@ -32,13 +32,13 @@ end
               "INSERT INTO listings(name, description, price, start_date, end_date)
               VALUES('#{name}', '#{description}', #{price}, '#{start_date}', '#{end_date}')
               RETURNING id, name, description, price, start_date, end_date;")
-    
+
             Listing.new(
-              result[0]['id'], 
-              result[0]['name'], 
-              result[0]['description'], 
-              result[0]['price'], 
-              result[0]['start_date'], 
+              result[0]['id'],
+              result[0]['name'],
+              result[0]['description'],
+              result[0]['price'],
+              result[0]['start_date'],
               result[0]['end_date']
             )
   end

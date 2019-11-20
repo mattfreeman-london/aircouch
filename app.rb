@@ -61,15 +61,21 @@ class AirCouch < Sinatra::Base
   end
 
   post '/login' do
-    if ENV['RACK'] == 'test'
-      connect = PG.connect(dbname: 'aircouch_test')
-    else
-      connect = PG.connect(dbname: 'aircouch')
-    end
-    result = connect.exec("SELECT * FROM users WHERE email = '#{params[:email]}'")
-    user = User.new(id: result[0]['id'], name: result[0]['name'], email: result[0]['email'], password: result[0]['password'])
-    session[:user_id] = user.id
-    redirect '/welcome'
+    user = User.authenticate(email: params[:email], password: params[:password])
+
+      if user
+        session[:user_id] = user.id
+        redirect '/welcome'
+      else
+        flash[:notice] = 'Please check your email or password'
+        redirect '/login'
+      end
+  end
+
+  post '/login/destroy' do
+    session.clear
+    flash[:notice] = "You have signed out"
+    redirect('/listings')
   end
 
   run! if app_file == $0

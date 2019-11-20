@@ -22,8 +22,19 @@ describe 'users' do
       authenticated_user = User.authenticate(email: 'nat@makers.com', password: 'password')
       expect(authenticated_user.id).to eq user.id
     end
+
+    it 'returns nil when an incorrect email address is used' do
+      user = User.create(name: 'Nat', email: 'nat@makers.com', password: 'password')
+      expect(User.authenticate(email: 'bob@bob.com', password: 'password')).to be_nil
+    end
+
+    it 'returns nil when a wrong password is used' do
+      user = User.create(name: 'Nat', email: 'nat@makers.com', password: 'password')
+      expect(User.authenticate(email: 'nat@makers.com', password: 'wrongpassword')).to be_nil
+    end
   end
 end
+
 describe '.create' do
   it 'hashes the Password using BCrypt' do
     expect(BCrypt::Password).to receive(:create).with('password123')

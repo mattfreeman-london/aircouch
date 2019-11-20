@@ -7,13 +7,12 @@
   <title>Document</title>
 </head>
 <body>
-<p>Please Select Your Dates</p>
-<form action="/listings/<%= @id %>/book" method="post">
-  <input type="date" name="start_date">
-  <input type="date" name="end_date">
-  <input type="submit" value="Request">
-</form>
-
+  <p>Please Select Your Dates</p>
+  <form action="/listings/<%= @id %>/book" method="post">
+    <input type="date" name="start_date" min="2019-11-19" max="2019-12-19"></input>
+    <input type="date" name="end_date" min="2019-11-19" max="2019-12-19"></input>
+    <input type="submit" value="Request"></input>
+  </form>
 
 </body>
 </html>
