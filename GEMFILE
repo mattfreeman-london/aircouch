@@ -5,6 +5,7 @@ gem 'sinatra'
 gem 'pg'
 gem 'sinatra-flash'
 gem 'bcrypt'
+gem 'simple_calendar', '~> 2.0'
 
 group :test do
   gem 'capybara'
