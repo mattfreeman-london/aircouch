@@ -1,4 +1,5 @@
 require 'pg'
+require_relative 'booking'
 
 class Listing
 
@@ -58,5 +59,15 @@ class Listing
                   listing['host_id']
                 )
               }
+  end
+
+  def get_bookings(id)
+    result = DatabaseConnection.query("SELECT * FROM bookings WHERE listing_id = '#{id}';")
+    result.map { |booking| Booking.new(
+                  booking['id'],
+                  booking['start_date'],
+                  booking['end_date'],
+                  booking['guest_id'],
+                  booking['listing_id'])}
   end
 end

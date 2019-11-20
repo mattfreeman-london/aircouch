@@ -58,6 +58,11 @@ class AirCouch < Sinatra::Base
     erb :welcome
   end
 
+  post '/welcome/:id' do
+    "You approved this booking"
+    redirect "/welcome/#{session[:user_id]}"
+  end
+
   get '/login' do
     erb :login
   end
