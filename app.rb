@@ -23,7 +23,7 @@ class AirCouch < Sinatra::Base
   end
 
   post '/listings/new' do
-    Listing.create(params[:name], params[:description], params[:price], params[:available_date])
+    Listing.create(params[:name], params[:description], params[:price], params[:start_date], params[:end_date])
     redirect '/listings'
   end
 
