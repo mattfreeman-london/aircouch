@@ -28,12 +28,12 @@
       <a id="top_nav_bar_links" href="/login/destroy">Log Out</a>
     </li>
   </ul>
-  
+
   <h2>New booking</h2>
   <p>Please Select Your Dates</p>
   <form action="/listings/<%= @id %>/book" method="post">
-    <input type="date" name="start_date" min="2019-11-19" max="2019-12-19"></input>
-    <input type="date" name="end_date" min="2019-11-19" max="2019-12-19"></input>
+    <input type="date" id="date" name="start_date" min="2019-11-19" max="2019-12-19"></input>
+    <input type="date" id="date" name="end_date" min="2019-11-19" max="2019-12-19"></input>
     <input type="submit" value="Request"></input>
   </form>
 </body>

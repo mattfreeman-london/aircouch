@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<% require_relative '../lib/database_connection' %>
 
 <head>
   <meta charset="utf-8">
@@ -12,26 +11,24 @@
 </head>
 
 <body>
-  <ul id="top_nav_bar">
+<ul id="top_nav_bar">
 
-    <li id="top_nav_bar_list">
-      <a id="top_nav_bar_links" href="/users/new">Sign Up</a>
-    </li>
-    <li id="top_nav_bar_list">
-      <a id="top_nav_bar_links" href="/listings">Listings</a>
-    </li>
-    <li id="top_nav_bar_list">
-      <a id="top_nav_bar_links" href="/login">Log In</a>
-    </li>
-    <li id="top_nav_bar_list">
-      <!-- this one doesn't work at the moment -->
-      <a id="top_nav_bar_links" href="/login/destroy">Log Out</a>
-    </li>
-  </ul>
-  
-<h2>
-  Welcome to AirCouch, <%= @user.name %>. Thanks for joining us!
-</h2>
+  <li id="top_nav_bar_list">
+    <a id="top_nav_bar_links" href="/users/new">Sign Up</a>
+  </li>
+  <li id="top_nav_bar_list">
+    <a id="top_nav_bar_links" href="/listings">Listings</a>
+  </li>
+  <li id="top_nav_bar_list">
+    <a id="top_nav_bar_links" href="/login">Log In</a>
+  </li>
+  <li id="top_nav_bar_list">
+    <!-- this one doesn't work at the moment -->
+    <a id="top_nav_bar_links" href="/login/destroy">Log Out</a>
+  </li>
+</ul>
+
+<h2>Welcome to AirCouch, <%= @user.name %>. Thanks for joining us!</h2>
 
 <form action='/listings' method="get">
   <button type="submit">View listings</button>
@@ -45,6 +42,24 @@
   <input type="submit" value="Log out"/>
 </form>
 
-</body>
+<div>
+  <h3> My listings </h3>
+  <% @listings.each do |my_listing| %>
+  <ul>
+    <li>
+      <%= my_listing.name %>, <%= my_listing.description %>, <%= my_listing.price %>,
+      <%= my_listing.start_date %>, <%= my_listing.end_date %>,
+      <% my_booking = my_listing.get_bookings(my_listing.id)[0] %>
+      <% if my_booking %>
+        <p> Has been requested from <%= my_booking.start_date %> to <%= my_booking.end_date %></p>
+        <form action='/welcome/<%="#{@user.id}"%>' method="post">
+          <input type="submit" value="Approve"/>
+        </form>
+      <% end %>
+    </li>
+  </ul>
 
-</html>
+  <% end %>
+
+</div>
+</body>
