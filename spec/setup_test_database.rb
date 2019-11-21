@@ -11,7 +11,7 @@ end
 def create_tables(connection)
   connection.exec("CREATE TABLE users(id SERIAL PRIMARY KEY, name VARCHAR(60), email VARCHAR(60), password VARCHAR(60));")
   connection.exec("CREATE TABLE listings(id SERIAL PRIMARY KEY, name VARCHAR(60), description VARCHAR(100), price DECIMAL(6,2), start_date DATE, end_date DATE, host_id INTEGER REFERENCES users (id));")
-  connection.exec("CREATE TABLE bookings(id SERIAL PRIMARY KEY, start_date DATE, end_date DATE, guest_id INTEGER REFERENCES users(id), listing_id INTEGER REFERENCES listings (id));")
+  connection.exec("CREATE TABLE bookings(id SERIAL PRIMARY KEY, start_date DATE, end_date DATE, approved BOOLEAN, guest_id INTEGER REFERENCES users(id), listing_id INTEGER REFERENCES listings (id));")
 end
 
 def drop_tables(connection)

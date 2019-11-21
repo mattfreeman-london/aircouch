@@ -63,6 +63,11 @@ class AirCouch < Sinatra::Base
     redirect "/welcome/#{session[:user_id]}"
   end
 
+  post '/approve/:booking_id' do
+    Booking.approve(params[:booking_id])
+    redirect "/welcome/#{session[:user_id]}"
+  end
+
   get '/login' do
     erb :login
   end
