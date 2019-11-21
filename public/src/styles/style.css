@@ -1,0 +1,69 @@
+body {
+  background-color: #c3f0f9;
+}
+
+h2 {
+  font-family: verdana;
+  font-size: 20px;
+  color: blue;
+  text-align: center;
+  width: 300px;
+  border: 15px solid #28a9d7;
+  padding: 50px;
+  margin: 20px;
+}
+
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+
+input[type=text], input[type=name], input[type=email], input[type=password],
+input[type=date] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #99ffcc;
+  border: none;
+  color: blue;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navigation bar */
+#top_nav_bar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+#top_nav_bar_list {
+  float: left;
+}
+
+#top_nav_bar_links {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+/* end of Navigation bar */

@@ -1,4 +1,35 @@
-<h1> Listings </h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>AirCouch - Listings</title>
+
+  <link rel="stylesheet" type="text/css" href="/public/src/styles/style.css">
+</head>
+
+<body>
+  <ul id="top_nav_bar">
+
+    <li id="top_nav_bar_list">
+      <a id="top_nav_bar_links" href="/users/new">Sign Up</a>
+    </li>
+    <li id="top_nav_bar_list">
+      <a id="top_nav_bar_links" href="/listings">Listings</a>
+    </li>
+    <li id="top_nav_bar_list">
+      <a id="top_nav_bar_links" href="/login">Log In</a>
+    </li>
+    <li id="top_nav_bar_list">
+      <!-- this one doesn't work at the moment -->
+      <a id="top_nav_bar_links" href="/login/destroy">Log Out</a>
+    </li>
+  </ul>
+
+<h2> Listings </h2>
 <ul>
   <% @listings.each do |listing| %>
   <li>
@@ -9,3 +40,6 @@
   </li>
   <% end %>
 </ul>
+
+</body>
+</html>

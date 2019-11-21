@@ -1,16 +1,43 @@
 <% require_relative '../lib/database_connection' %>
 
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>AirCouch - Welcome</title>
+
+  <link rel="stylesheet" type="text/css" href="/public/src/styles/style.css">
+</head>
+
+<body>
+<ul id="top_nav_bar">
+
+  <li id="top_nav_bar_list">
+    <a id="top_nav_bar_links" href="/users/new">Sign Up</a>
+  </li>
+  <li id="top_nav_bar_list">
+    <a id="top_nav_bar_links" href="/listings">Listings</a>
+  </li>
+  <li id="top_nav_bar_list">
+    <a id="top_nav_bar_links" href="/login">Log In</a>
+  </li>
+  <li id="top_nav_bar_list">
+    <!-- this one doesn't work at the moment -->
+    <a id="top_nav_bar_links" href="/login/destroy">Log Out</a>
+  </li>
+</ul>
+
 <h2>Welcome to AirCouch, <%= @user.name %>. Thanks for joining us!</h2>
 
 <form action='/listings' method="get">
   <button type="submit">View listings</button>
-</form>
+</form><
 
 <form action='/listings/new' method="get">
   <button type="submit">Make new listing</button>
 </form>
 
-<br>
 <form action="/login/destroy" method="post">
   <input type="submit" value="Log out"/>
 </form>
@@ -33,4 +60,6 @@
   </ul>
 
   <% end %>
+
 </div>
+</body>
