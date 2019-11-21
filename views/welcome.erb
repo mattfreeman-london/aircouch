@@ -24,10 +24,14 @@
       <%= my_listing.start_date %>, <%= my_listing.end_date %>,
       <% my_booking = my_listing.get_bookings(my_listing.id)[0] %>
       <% if my_booking %>
-        <p> Has been requested from <%= my_booking.start_date %> to <%= my_booking.end_date %> by <%= my_booking.find_guest %></p>
-        <form action='/welcome/<%="#{@user.id}"%>' method="post">
-          <input type="submit" value="Approve"/>
-        </form>
+        <% if my_booking.approved == 'f' %>
+          <p> Booking has been requested from <%= my_booking.start_date %> to <%= my_booking.end_date %> by <%= my_booking.find_guest %></p>
+          <form action='/approve/<%= my_booking.id %>' method="post">
+            <input type="submit" value="Approve"/>
+          </form>
+        <% elsif my_booking.approved == 't' %>
+          <p> Booking has been approved from <%= my_booking.start_date %> to <%= my_booking.end_date %> by <%= my_booking.find_guest %></p>
+        <% end %>
       <% end %>
     </li>
   </ul>

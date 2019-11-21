@@ -4,6 +4,7 @@ describe Booking do
   connection = PG.connect(dbname: 'aircouch_test')
   start_date = "2019-8-1"
   end_date = "2019-9-1"
+  approved = 'f'
   let (:test_user) {double(:user, id: 1, name: "Robert", email:"test@test.com")}
   let (:test_listing) {double(:listing, id: 1, price: 30)}
 
@@ -40,8 +41,8 @@ describe Booking do
 
   context '#approve' do
     it 'approves booking' do
-      booking = Booking.create('2019-11-21', '2019-11-23', '1', '1')
-      booking.approve
+      add_booking(connection)
+      Booking.new('1', start_date, end_date, approved, test_user.id, test_listing.id).approve('1')
       expect(Booking.find(1)[0].approved).to eq 't'
     end
   end

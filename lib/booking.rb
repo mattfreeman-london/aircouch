@@ -16,7 +16,7 @@ class Booking
   def self.create(start_date, end_date, guest_id, listing_id)
     result = DatabaseConnection.query(
               "INSERT INTO bookings(start_date, end_date, approved, guest_id, listing_id)
-              VALUES('#{start_date}', '#{end_date}', FALSE, '#{guest_id}', '#{listing_id}')
+              VALUES('#{start_date}', '#{end_date}', false, '#{guest_id}', '#{listing_id}')
               RETURNING start_date, end_date, approved, guest_id, listing_id")
 
     Booking.new(result[0]['id'],
@@ -54,8 +54,8 @@ class Booking
     user.name
   end
 
-  def approve
-    @approved = TRUE
-    DatabaseConnection.query("UPDATE bookings SET approved = TRUE WHERE id = 1;")
+  def self.approve(booking_id)
+    @approved = true
+    DatabaseConnection.query("UPDATE bookings SET approved = TRUE WHERE id = '#{booking_id}';")
   end
 end
