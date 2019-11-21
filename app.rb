@@ -23,8 +23,9 @@ class AirCouch < Sinatra::Base
   end
 
   post '/listings/new' do
-    Listing.create(params[:name], params[:description], params[:price], params[:available_date])
-    redirect '/listings'
+    @id = session[:user_id]
+    Listing.create(params[:name], params[:description], params[:price], params[:start_date], params[:end_date], session[:user_id])
+    redirect "/welcome/#{session[:user_id]}"
   end
 
   get '/listings/:id' do
@@ -48,12 +49,41 @@ class AirCouch < Sinatra::Base
   post '/users/new' do
     user = User.create(name: params[:name], email: params[:email], password: params[:password])
     session[:user_id] = user.id
-    redirect '/welcome'
+    redirect "/welcome/#{user.id}"
   end
 
-  get '/welcome' do
+  get '/welcome/:id' do
     @user = User.find(session[:user_id])
+    @listings = Listing.findhost(session[:user_id])
     erb :welcome
+  end
+
+  post '/welcome/:id' do
+    "You approved this booking"
+    redirect "/welcome/#{session[:user_id]}"
+  end
+
+  get '/login' do
+    erb :login
+  end
+
+  post '/login' do
+    user = User.authenticate(email: params[:email], password: params[:password])
+
+      if user
+        session[:user_id] = user.id
+        redirect "/welcome/#{user.id}"
+      else
+        flash[:notice] = 'Please check your email or password'
+        redirect '/login'
+      end
+  end
+
+
+  post '/login/destroy' do
+    session.clear
+    flash[:notice] = "You have signed out"
+    redirect('/listings')
   end
 
   run! if app_file == $0

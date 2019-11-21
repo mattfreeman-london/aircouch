@@ -1,3 +1,5 @@
+<% require_relative '../lib/database_connection' %>
+
 <h2>Welcome to AirCouch, <%= @user.name %>. Thanks for joining us!</h2>
 
 <form action='/listings' method="get">
@@ -7,3 +9,28 @@
 <form action='/listings/new' method="get">
   <button type="submit">Make new listing</button>
 </form>
+
+<br>
+<form action="/login/destroy" method="post">
+  <input type="submit" value="Log out"/>
+</form>
+
+<div>
+  <h3> My listings </h3>
+  <% @listings.each do |my_listing| %>
+  <ul>
+    <li>
+      <%= my_listing.name %>, <%= my_listing.description %>, <%= my_listing.price %>,
+      <%= my_listing.start_date %>, <%= my_listing.end_date %>,
+      <% my_booking = my_listing.get_bookings(my_listing.id)[0] %>
+      <% if my_booking %>
+        <p> Has been requested from <%= my_booking.start_date %> to <%= my_booking.end_date %></p>
+        <form action='/welcome/<%="#{@user.id}"%>' method="post">
+          <input type="submit" value="Approve"/>
+        </form>
+      <% end %>
+    </li>
+  </ul>
+
+  <% end %>
+</div>

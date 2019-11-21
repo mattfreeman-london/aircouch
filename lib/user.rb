@@ -1,4 +1,5 @@
 require 'bcrypt'
+require_relative './setup_env_db'
 
 class User
 
@@ -11,26 +12,26 @@ class User
   end
 
   def self.create(name:, email:, password:)
-    if ENV['RACK'] == 'test'
-      connect = PG.connect(dbname: 'aircouch_test')
-    else
-      connect = PG.connect(dbname: 'aircouch')
-    end
     encrypted_password = BCrypt::Password.create(password)
-    results = connect.exec("INSERT INTO users (name, email, password)
-                        VALUES ('#{name}', '#{email}', '#{encrypted_password}')
-                        RETURNING id, name, email;")
+    results = DatabaseConnection.query(
+                "INSERT INTO users (name, email, password)
+                VALUES ('#{name}', '#{email}', '#{encrypted_password}')
+                RETURNING id, name, email;")
 
     User.new(id: results.values[0][0], name: results[0]['name'], email: results[0]['email'])
   end
 
   def self.find(id)
-    if ENV['RACK'] == 'test'
-      connect = PG.connect(dbname: 'aircouch_test')
-    else
-      connect = PG.connect(dbname: 'aircouch')
-    end
-    result = connect.exec("SELECT * FROM users WHERE id = '#{id}'")
+    result = DatabaseConnection.query("SELECT * FROM users WHERE id = '#{id}'")
     User.new(id: result[0]['id'], name: result[0]['name'], email: result[0]['email'])
   end
+
+  def self.authenticate(email:, password:)
+    result = DatabaseConnection.query("SELECT * FROM users WHERE email = '#{email}'")
+      return unless result.any?
+        return unless BCrypt::Password.new(result[0]['password']) == password
+
+    User.new(id: result[0]['id'], name: result[0]['name'], email: result[0]['email'])
+  end
+
 end
