@@ -9,7 +9,7 @@ describe Booking do
   let (:guest_user) {double(:user, id: 2, name: "Roberta", email:"testy@test.com")}
   let (:test_listing) {double(:listing, id: 1, price: 30)}
 
-  subject(:booking) { described_class.new(start_date, end_date, guest_id, listing_id)}
+  # subject(:booking) { described_class.new(start_date, end_date, guest_user.d, test_listing.id}
   context "#create" do
     it "creates a new booking" do
       expect(Booking.create(start_date, end_date, test_user.id, test_listing.id)).to be_a(Booking)
@@ -22,11 +22,6 @@ describe Booking do
       expect(test_book.guest_id).to eq("1")
       expect(test_book.listing_id).to eq("1")
       expect(test_book.approved).to eq("f")
-    end
-
-    it 'raises error when dates already booked' do
-      add_booking(connection)
-      expect { add_booking(connection) }.to raise_error "These dates are already booked"
     end
   end
 
@@ -47,10 +42,11 @@ describe Booking do
 
   context '#approve' do
     it 'approves booking' do
+      booking = Booking.create(start_date, end_date, test_user.id, test_listing.id)
       result = add_booking(connection)
       #Booking.new('1', start_date, end_date, approved, test_user.id, test_listing.id).approve('1')
-      booking.approve(booking.id)
-      expect(booking.find(1)[0].approved).to eq 't'
+      Booking.approve(booking.guest_id)
+      expect(Booking.find(1)[0].approved).to eq 't'
     end
   end
 end
