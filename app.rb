@@ -38,7 +38,7 @@ class AirCouch < Sinatra::Base
     @end_date = params["end_date"]
     @listing_id = params["id"]
     @guest_id = "1"
-    new_booking = Booking.create(params["start_date"], params["end_date"], @guest_id, params["id"], 20)
+    new_booking = Booking.create(params["start_date"], params["end_date"], @guest_id, params["id"])
     "Your Booking has been requested"
   end
 
