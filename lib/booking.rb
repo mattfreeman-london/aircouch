@@ -49,10 +49,10 @@ class Booking
                   booking['listing_id'])}
   end
 
-  # def find_guest
-  #   user = User.find(@guest_id)
-  #   user.name
-  # end
+  def find_guest
+    user = User.find(@guest_id)
+    user.name
+  end
 
   def self.approve(booking_id)
     @approved = true
