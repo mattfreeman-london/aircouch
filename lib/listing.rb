@@ -67,6 +67,7 @@ class Listing
                   booking['id'],
                   booking['start_date'],
                   booking['end_date'],
+                  booking['approved'],
                   booking['guest_id'],
                   booking['listing_id'])}
   end
