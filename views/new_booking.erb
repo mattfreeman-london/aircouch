@@ -1,18 +1,54 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
   <title>Document</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+  <title>AirCouch - New Booking</title>
+
+  <link rel="stylesheet" type="text/css" href="/public/src/styles/style.css">
+
 </head>
+
 <body>
+  <ul id="top_nav_bar">
+
+    <li id="top_nav_bar_list">
+      <a id="top_nav_bar_links" href="/users/new">Sign Up</a>
+    </li>
+    <li id="top_nav_bar_list">
+      <a id="top_nav_bar_links" href="/listings">Listings</a>
+    </li>
+    <li id="top_nav_bar_list">
+      <a id="top_nav_bar_links" href="/login">Log In</a>
+    </li>
+    <li id="top_nav_bar_list">
+      <!-- this one doesn't work at the moment -->
+      <a id="top_nav_bar_links" href="/login/destroy">Log Out</a>
+    </li>
+  </ul>
+
+  <h2>New booking</h2>
   <p>Please Select Your Dates</p>
-  <form action="/listings/<%= @id %>/book" method="post">
-    <input type="date" name="start_date" min="2019-11-19" max="2019-12-19"></input>
-    <input type="date" name="end_date" min="2019-11-19" max="2019-12-19"></input>
-    <input type="submit" value="Request"></input>
+
+  <form action="/listings/<%= @id %>/book" method="post" class="date-form">
+    <input type="text" name="start_date" min="2019-11-03" max="2019-11-15" class="start_date">
+    <input type="text" name="end_date" class="end_date">
+    <input type="submit" value="Request">
   </form>
 
+  <script src="http://code.jquery.com/jquery-1.8.3.js" type="text/javascript"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript" src="/interface.js"></script>
+
 </body>
+
 </html>

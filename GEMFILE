@@ -5,7 +5,11 @@ gem 'sinatra'
 gem 'pg'
 gem 'sinatra-flash'
 gem 'bcrypt'
+<<<<<<< HEAD
 gem 'mail'
+=======
+gem 'shotgun'
+>>>>>>> 68647b43dd9c3c6472082e4ea171205b6aee50c5
 
 group :test do
   gem 'capybara'
