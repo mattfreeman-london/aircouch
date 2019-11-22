@@ -1,10 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>AirCouch - New Listing</title>
+  <
+  link rel="stylesheet" type="text/css" href="/public/src/styles/style.css">
+</head>
+
+<body>
+  <ul id="top_nav_bar">
+
+    <li id="top_nav_bar_list">
+      <a id="top_nav_bar_links" href="/users/new">Sign Up</a>
+    </li>
+    <li id="top_nav_bar_list">
+      <a id="top_nav_bar_links" href="/listings">Listings</a>
+    </li>
+    <li id="top_nav_bar_list">
+      <a id="top_nav_bar_links" href="/login">Log In</a>
+    </li>
+    <li id="top_nav_bar_list">
+      <!-- this one doesn't work at the moment -->
+      <a id="top_nav_bar_links" href="/login/destroy">Log Out</a>
+    </li>
+  </ul>
+
+<h2>New Listing</h2>
 <form action="/listings/new" method="post">
   <input type="text" name="name" placeholder="enter name of listing"/>
   <input type="text" name="description" placeholder="enter a brief description"/>
-  <input type="number" name="price" placeholder="enter price per night"/>
+  <input type="number" id="number" name="price" placeholder="enter price per night"/>
   <label for="start_date"> Enter start date </label>
-  <input type="date" name="start_date" placeholder="dd/mm/yyyy"/>
+  <input type="date" id="date" name="start_date" placeholder="dd/mm/yyyy"/>
   <label for="end_date"> Enter end date </label>
-  <input type="date" name="end_date" placeholder="dd/mm/yyyy"/>
+  <input type="date" id="date" name="end_date" placeholder="dd/mm/yyyy"/>
   <input type="submit" value="Submit"/>
 </form>
+</body>
+</html>
