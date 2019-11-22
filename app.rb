@@ -34,12 +34,9 @@ class AirCouch < Sinatra::Base
   end
 
   post '/listings/:id/book' do
-    @start_date = params["start_date"]
-    @end_date = params["end_date"]
-    @listing_id = params["id"]
-    @guest_id = "1"
-    new_booking = Booking.create(params["start_date"], params["end_date"], @guest_id, params["id"])
+    new_booking = Booking.create(params["start_date"], params["end_date"], session["user_id"], params["id"])
     "Your Booking has been requested"
+    redirect "/welcome/#{session["user_id"]}"
   end
 
   get '/users/new' do
@@ -55,6 +52,7 @@ class AirCouch < Sinatra::Base
   get '/welcome/:id' do
     @user = User.find(session[:user_id])
     @listings = Listing.findhost(session[:user_id])
+    @bookings = Booking.findGuest(session[:user_id])
     erb :welcome
   end
 

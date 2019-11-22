@@ -58,4 +58,27 @@ class Booking
     @approved = true
     DatabaseConnection.query("UPDATE bookings SET approved = TRUE WHERE id = '#{booking_id}';")
   end
+
+  def self.findGuest(guest_id)
+    result = DatabaseConnection.query("SELECT * FROM bookings WHERE guest_id = '#{guest_id}';")
+    result.map { |booking| Booking.new(
+                  booking['id'],
+                  booking['start_date'],
+                  booking['end_date'],
+                  booking['approved'],
+                  booking['guest_id'],
+                  booking['listing_id'])}
+  end
+
+  def find_listing(listing_id)
+    result = DatabaseConnection.query("SELECT * FROM listings WHERE id = '#{listing_id}';")
+    result.map { |listing| Listing.new(
+                  listing['id'],
+                  listing['name'],
+                  listing['description'],
+                  listing['price'],
+                  listing['start_date'],
+                  listing['end_date'],
+                  listing['host_id'])}
+  end
 end
