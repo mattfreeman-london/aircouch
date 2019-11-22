@@ -10,7 +10,14 @@ h2 {
   width: 300px;
   border: 15px solid #28a9d7;
   padding: 50px;
-  margin: 20px;
+  text-align: center;
+
+}
+
+div {
+  display: flex;
+  text-align: center;
+  margin: 0 auto;
 }
 
 p {
