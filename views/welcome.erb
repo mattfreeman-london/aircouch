@@ -48,8 +48,8 @@
   <% @listings.each do |my_listing| %>
   <ul>
     <li>
-      <%= my_listing.name %>, <%= my_listing.description %>, <%= my_listing.price %>,
-      <%= my_listing.start_date %>, <%= my_listing.end_date %>,
+      <%= my_listing.name %>, <%= my_listing.description %>, £<%= my_listing.price %>, available from
+      <%= my_listing.start_date %> to <%= my_listing.end_date %>
       <% my_booking = my_listing.get_bookings(my_listing.id)[0] %>
       <% if my_booking %>
         <% if my_booking.approved == 'f' %>
