@@ -63,8 +63,19 @@
       <% end %>
     </li>
   </ul>
-
   <% end %>
+</div>
 
+<div>
+  <h3> My bookings </h3>
+    <% @bookings.each do |booking| %>
+    <ul>
+      <li>
+        <% listing = booking.find_listing(booking.listing_id)[0] %> <%= listing.name %>
+        has been <% if booking.approved == 't' %> approved <% else %> requested for <% end %>
+        <%= booking.start_date %> to the <%= booking.end_date %>
+      </li>
+    </ul>
+    <% end %>
 </div>
 </body>
