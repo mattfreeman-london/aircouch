@@ -84,11 +84,14 @@ class AirCouch < Sinatra::Base
       end
   end
 
-
   post '/login/destroy' do
     session.clear
     flash[:notice] = "You have signed out"
     redirect('/listings')
+  end
+
+  get '/images' do
+    erb :images
   end
 
   run! if app_file == $0

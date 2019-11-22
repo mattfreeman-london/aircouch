@@ -24,11 +24,12 @@
       <a id="top_nav_bar_links" href="/login">Log In</a>
     </li>
     <li id="top_nav_bar_list">
-      <!-- this one doesn't work at the moment -->
-      <a id="top_nav_bar_links" href="/login/destroy">Log Out</a>
+      <form id="logout" action="/login/destroy" method="post">
+            <input id="logout" type="submit" value="Log out"/>
+      </form>
     </li>
   </ul>
-  
+
 <h2>Sign up to AirCouch below:</h2>
 <form action="/users/new" method="post">
   <input type="name" name="name" placeholder="Enter username..." /><br>
